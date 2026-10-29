@@ -204,5 +204,3 @@ javac -d out src/*.java
 
 Then run the required program using the commands above.
 ---
-
-⭐ If you find this project useful, consider giving the repository a star!

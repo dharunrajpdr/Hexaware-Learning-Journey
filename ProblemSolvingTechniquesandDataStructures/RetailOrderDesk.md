@@ -136,8 +136,6 @@ Dynamic Programming finds the minimum number of coins by using solutions to smal
 
 ```text
 Retail-Order-Desk/
-├── README.md
-├── orders.csv
 ├── src/
 │   ├── Order.java
 │   ├── OrderSearch.java
@@ -152,8 +150,6 @@ Retail-Order-Desk/
 │   ├── task3-duplicate-results.txt
 │   ├── task4-stack-queue-results.txt
 │   └── task5-refund-results.txt
-└── docs/
-    └── complexity-and-data-structures.md
 ```
 
 ---

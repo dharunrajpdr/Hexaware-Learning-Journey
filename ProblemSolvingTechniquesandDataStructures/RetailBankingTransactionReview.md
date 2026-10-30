@@ -70,18 +70,18 @@ Implement a Queue and a Stack without using library collections for their core s
 **Queue — Manual Review Backlog**
 - Follows FIFO (First In, First Out).
 - The first transaction added is the first transaction reviewed.
-- Implement enqueue, dequeue, peek, and isEmpty.
+- Implement `enqueue()`, `dequeue()`, `peek()`, and `isEmpty()`.
 
 **Stack — Reverse Last Adjustment**
 - Follows LIFO (Last In, First Out).
 - The most recent adjustment is reversed first.
-- Implement push, pop, peek, and isEmpty.
+- Implement `push()`, `pop()`, `peek()`, and `isEmpty()`.
 
 | Operation | Expected Time | Space |
 |---|---|---|
-| Queue enqueue | O(1) | O(n) total |
+| Queue enqueue | O(1) amortized | O(n) total |
 | Queue dequeue | O(1) | O(n) total |
-| Stack push | O(1) | O(n) total |
+| Stack push | O(1) amortized | O(n) total |
 | Stack pop | O(1) | O(n) total |
 
 Use an array-based implementation with manual index management or linked nodes, rather than Java's built-in collection classes, for the initial implementations.
@@ -111,7 +111,7 @@ Divide and Conquer divides the input into smaller sections, finds each section's
 - Complexity table covering best, average, and worst cases and space.
 - Short justification for each algorithm and data structure.
 
-## 🗂️ Suggested Project Structure
+## 🗂️ Project Structure
 
 ```text
 Retail-Banking-Transaction-Review/
@@ -124,23 +124,83 @@ Retail-Banking-Transaction-Review/
 │   ├── CustomQueue.java
 │   ├── CustomStack.java
 │   └── TransactionMinMax.java
-├── output/
-│   ├── search-results.txt
-│   ├── sorting-results.txt
-│   ├── duplicate-results.txt
-│   ├── queue-stack-results.txt
-│   └── min-max-results.txt
+└── output/
+    ├── search-results.txt
+    ├── sorting-results.txt
+    ├── duplicate-results.txt
+    ├── queue-stack-results.txt
+    └── min-max-results.txt
 ```
 
-## 🧪 Testing and Benchmarking
+## ▶️ Commands to Run the Program
 
-1. Test searching with the first, middle, and last transaction IDs, plus an ID that does not exist.
-2. Test sorting with ascending, descending, and identical timestamps.
-3. Test duplicate detection with matching transactions inside and outside the 60-second window.
-4. Test stack and queue operations, including empty structures.
-5. Test minimum and maximum calculations with positive, negative, and repeated amounts.
-6. Record actual execution times using `System.nanoTime()` and compare the results.
+### Prerequisites
 
+Install the Java Development Kit (JDK) and verify the installation:
+
+```bash
+java -version
+javac -version
+```
+
+### 1. Clone the Repository
+
+```bash
+git clone <your-repository-url>
+cd Retail-Banking-Transaction-Review
+```
+
+### 2. Compile the Java Files
+
+Run the following command from the project root directory:
+
+```bash
+javac -d out src/*.java
+```
+
+### 3. Run the Programs
+
+Execute each program separately:
+
+**Transaction ID Search**
+```bash
+java -cp out TransactionSearch
+```
+
+**Customer Statement Sorting**
+```bash
+java -cp out StatementSorting
+```
+
+**Duplicate Transaction Detection**
+```bash
+java -cp out DuplicateDetector
+```
+
+**Custom Queue**
+```bash
+java -cp out CustomQueue
+```
+
+**Custom Stack**
+```bash
+java -cp out CustomStack
+```
+
+**Minimum and Maximum Transaction Amount**
+```bash
+java -cp out TransactionMinMax
+```
+
+**Note:** These commands assume all Java files are inside `src/` and do not declare package names. Each class must contain a `main()` method to run independently. The `transactions.csv` file must be read by the Java code if you want to use it as input; creating the file alone does not automatically load its contents.
+
+### 4. Recompile After Code Changes
+
+Whenever you modify a Java source file, compile the files again:
+
+```bash
+javac -d out src/*.java
+```
+
+Then run the required program using the commands above.
 ---
-
-**Developed as part of Hexaware Training — Data Structures and Algorithms Assignment.**

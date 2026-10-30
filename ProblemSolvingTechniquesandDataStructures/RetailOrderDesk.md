@@ -8,7 +8,7 @@ An online retailer processes approximately **50,000 orders per day**. Different 
 - 📦 **Warehouse:** Sort and rank orders by amount for dispatch.
 - 💳 **Finance:** Identify duplicate orders before processing payments.
 
-This assignment demonstrates how Java data structures and algorithms can solve these real-world problems efficiently.
+This assignment demonstrates how Java data structures and algorithms can solve real-world problems efficiently.
 
 ---
 
@@ -34,6 +34,7 @@ This assignment demonstrates how Java data structures and algorithms can solve t
 5. Record execution times and explain the observed differences.
 
 **⏱️ Time Complexity:**
+
 - Linear Search: `O(n)`
 - Binary Search: `O(log n)` on sorted data.
 
@@ -50,6 +51,7 @@ Sort orders by amount in **descending order**, from highest to lowest.
 5. Record actual execution times.
 
 **⏱️ Time Complexity:**
+
 - Bubble Sort: `O(n²)` average and worst case.
 - Merge Sort: `O(n log n)`.
 - Java built-in object sorting: Typically `O(n log n)`.
@@ -70,6 +72,7 @@ Identify possible duplicate orders using these conditions:
 4. Explain the time and space complexity.
 
 **⏱️ Expected Complexity:**
+
 - Time: `O(n)` on average.
 - Space: `O(n)`.
 
@@ -80,11 +83,13 @@ Identify possible duplicate orders using these conditions:
 Implement your own Stack and Queue in Java.
 
 **↩️ Stack — Undo the Last Order Edit**
+
 - Push each order edit onto the stack.
 - Pop the latest edit when the user selects Undo.
 - Demonstrate Last In, First Out (LIFO).
 
 **📦 Queue — Manage the Dispatch Line**
+
 - Add orders to the back of the queue.
 - Remove orders from the front for dispatch.
 - Demonstrate First In, First Out (FIFO).
@@ -92,6 +97,7 @@ Implement your own Stack and Queue in Java.
 Replace your implementations with Java's built-in `ArrayDeque` and compare their behavior.
 
 **⏱️ Expected Complexity:**
+
 - Stack push/pop: `O(1)` per operation.
 - Queue enqueue/dequeue: `O(1)` per operation.
 - Storage: `O(n)`.
@@ -136,6 +142,7 @@ Dynamic Programming finds the minimum number of coins by using solutions to smal
 
 ```text
 Retail-Order-Desk/
+├── orders.csv
 ├── src/
 │   ├── Order.java
 │   ├── OrderSearch.java
@@ -144,26 +151,94 @@ Retail-Order-Desk/
 │   ├── CustomStack.java
 │   ├── CustomQueue.java
 │   └── RefundCalculator.java
-├── output/
-│   ├── task1-search-results.txt
-│   ├── task2-sorting-results.txt
-│   ├── task3-duplicate-results.txt
-│   ├── task4-stack-queue-results.txt
-│   └── task5-refund-results.txt
+├── out/
+└── output/
+    ├── task1-search-results.txt
+    ├── task2-sorting-results.txt
+    ├── task3-duplicate-results.txt
+    ├── task4-stack-queue-results.txt
+    └── task5-refund-results.txt
 ```
 
 ---
 
-## ⏱️ 5. Benchmarking Guidelines
+## ▶️ 5. Commands to Run the Program
 
-1. Use the same input data for all algorithms being compared.
-2. Keep file loading outside the timed section unless measuring file-loading performance.
-3. Measure binary-search sorting time separately from search time.
-4. Run benchmarks multiple times and calculate a representative result.
-5. Verify correctness before comparing execution times.
-6. Record actual measurements instead of inventing timings.
+### Prerequisites
 
-Actual performance depends on the computer, Java version, and implementation.
+Install the Java Development Kit (JDK) and verify the installation:
+
+```bash
+java -version
+javac -version
+```
+
+### Step 1: Clone the Repository
+
+```bash
+git clone <your-repository-url>
+cd Retail-Order-Desk
+```
+
+### Step 2: Compile All Java Files
+
+Run this command from the project root directory:
+
+```bash
+javac -d out src/*.java
+```
+
+### Step 3: Run Each Program
+
+**Task 1 — Order Search**
+
+```bash
+java -cp out OrderSearch
+```
+
+**Task 2 — Order Sorting**
+
+```bash
+java -cp out OrderSorting
+```
+
+**Task 3 — Duplicate Order Detection**
+
+```bash
+java -cp out DuplicateOrderDetector
+```
+
+**Task 4 — Custom Stack**
+
+```bash
+java -cp out CustomStack
+```
+
+**Task 4 — Custom Queue**
+
+```bash
+java -cp out CustomQueue
+```
+
+**Task 5 — Refund Calculator**
+
+```bash
+java -cp out RefundCalculator
+```
+
+### Step 4: Run a Specific Program
+
+For example, to run the order search program:
+
+```bash
+java -cp out OrderSearch
+```
+
+**Note:** These commands assume all Java files are inside the `src/` directory and do not declare package names. Each class must contain a `main()` method to run independently.
+
+The `orders.csv` file must be loaded by the Java code to use its data. Creating the CSV file alone does not automatically load its contents.
+
+---
 
 ---
 
@@ -185,15 +260,3 @@ Actual performance depends on the computer, Java version, and implementation.
 Here, `n` is the number of orders, `A` is the refund amount, and `D` is the number of denominations.
 
 ---
-
-## ✅ 7. Final Checklist
-
-- [ ] All Java files compile and execute correctly.
-- [ ] Search algorithms return the correct order.
-- [ ] Sorting algorithms rank orders from highest to lowest amount.
-- [ ] Duplicate detection follows all three specified conditions.
-- [ ] Stack undo and queue dispatch are demonstrated.
-- [ ] Greedy and Dynamic Programming results are compared.
-- [ ] Benchmark results and console outputs are included.
-- [ ] The complexity note is complete.
-- [ ] The repository README explains how to run the programs.

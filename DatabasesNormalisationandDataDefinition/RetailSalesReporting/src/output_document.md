@@ -1,0 +1,425 @@
+
+# Retail Sales Reporting
+
+## 1. Project Overview
+
+The Retail Sales Reporting project generates daily and monthly
+sales reports using SQL.
+
+The project uses customer, order, order item, product and
+payment information to analyze retail business performance.
+
+### Business Objectives
+
+- Identify the top 5 products by revenue.
+- Generate monthly sales reports.
+- Identify customers who place more than three orders.
+- Calculate average basket value for each city.
+- Find orders without payments.
+- Identify customers who have never placed orders.
+- Calculate product-category revenue contribution.
+- Find the day with the highest sales.
+
+## 2. Database Tables
+
+The project contains five tables.
+
+| Table | Description |
+|---|---|
+| customers | Stores customer information |
+| orders | Stores customer order details |
+| order_items | Stores products and quantities in each order |
+| products | Stores product information |
+| payments | Stores payment information |
+
+### Revenue Calculation
+
+Revenue = Quantity × Unit Price
+
+Example:
+
+Quantity = 2
+
+Unit Price = 500
+
+Revenue = 2 × 500 = 1000
+
+---
+
+## 3. SQL Queries and Expected Results
+
+### Query 1: Top 5 Products by Revenue
+
+**Purpose:**
+
+Find the five products generating the highest revenue.
+
+**SQL Concepts:**
+
+- JOIN
+- GROUP BY
+- SUM()
+- ROUND()
+- ORDER BY
+- LIMIT
+
+**Expected Result:**
+
+| Product ID | Product Name | Total Revenue |
+|---:|---|---:|
+| 101 | Laptop | 150000.00 |
+| 102 | Mobile | 60000.00 |
+| 105 | Office Chair | 24000.00 |
+| 103 | Headphones | 10500.00 |
+| 104 | Keyboard | 5000.00 |
+
+**Explanation:**
+
+The query joins products with order_items.
+It calculates revenue using quantity multiplied by unit price.
+GROUP BY combines the revenue for each product.
+ORDER BY sorts the products in descending order.
+LIMIT 5 displays the top five products.
+
+---
+
+### Query 2: Month-Wise Sales
+
+**Purpose:**
+
+Calculate the total sales generated during each month.
+
+**SQL Concepts:**
+
+- DATE_FORMAT()
+- SUM()
+- GROUP BY
+- ORDER BY
+
+**Expected Result:**
+
+| Sales Month | Monthly Sales |
+|---|---:|
+| 2026-01 | 113000.00 |
+| 2026-02 | 112500.00 |
+| 2026-03 | 48500.00 |
+
+**Explanation:**
+
+DATE_FORMAT() extracts the year and month from the order date.
+SUM() calculates the total monthly revenue.
+GROUP BY groups orders according to the month.
+
+---
+
+### Query 3: Customers with More Than Three Orders
+
+**Purpose:**
+
+Identify customers who have placed more than three orders.
+
+**SQL Concepts:**
+
+- JOIN
+- COUNT()
+- GROUP BY
+- HAVING
+- UPPER()
+- CONCAT()
+
+**Expected Result:**
+
+| Customer ID | Customer Details | Total Orders |
+|---:|---|---:|
+| 1 | ARUN - CHENNAI | 4 |
+| 2 | PRIYA - COIMBATORE | 4 |
+
+**Explanation:**
+
+COUNT() calculates the number of orders placed by each customer.
+
+UPPER() converts customer information into uppercase.
+
+CONCAT() combines the customer name and city.
+
+HAVING filters customers whose order count is greater than three.
+
+---
+
+### Query 4: Average Basket Value Per City
+
+**Purpose:**
+
+Calculate the average order value for customers in each city.
+
+**SQL Concepts:**
+
+- JOIN
+- Subquery
+- SUM()
+- AVG()
+- ROUND()
+- GROUP BY
+
+**Expected Result:**
+
+| City | Average Basket Value |
+|---|---:|
+| Erode | 16000.00 |
+| Chennai | 46150.00 |
+| Salem | 4000.00 |
+| Coimbatore | 8125.00 |
+
+**Explanation:**
+
+First, the subquery calculates the total value of each order.
+
+Then AVG() calculates the average order value for each city.
+
+ROUND() displays the result with two decimal places.
+
+---
+
+### Query 5: Orders Without Payment
+
+**Purpose:**
+
+Identify orders that do not have a corresponding payment record.
+
+**SQL Concepts:**
+
+- LEFT JOIN
+- IS NULL
+- DATE_FORMAT()
+
+**Expected Result:**
+
+| Order ID | Customer ID | Order Date | Payment Message |
+|---:|---:|---|---|
+| 1004 | 1 | 14-Feb-2026 | Payment not recorded |
+| 1008 | 2 | 05-Mar-2026 | Payment not recorded |
+| 1012 | 5 | 15-Mar-2026 | Payment not recorded |
+
+**Explanation:**
+
+LEFT JOIN returns all records from the orders table.
+
+If an order does not have a matching payment record,
+the payment columns contain NULL.
+
+WHERE payment_id IS NULL identifies those orders.
+
+---
+
+### Query 6: Customers with No Orders
+
+**Purpose:**
+
+Find customers who have never placed an order.
+
+**SQL Concepts:**
+
+- LEFT JOIN
+- IS NULL
+- CONCAT()
+- UPPER()
+- DATEDIFF()
+
+**Expected Result:**
+
+| Customer ID | Customer Details | Days Since Registration |
+|---:|---|---|
+| 6 | DIVYA - Coimbatore | Depends on current date |
+
+**Explanation:**
+
+LEFT JOIN combines customer and order information.
+
+WHERE order_id IS NULL finds customers without orders.
+
+DATEDIFF() calculates the number of days between
+the registration date and the current date.
+
+The days value changes depending on the execution date.
+
+---
+
+### Query 7: Product Category Revenue Share
+
+**Purpose:**
+
+Calculate the revenue generated by each product category
+and its percentage contribution to total revenue.
+
+**SQL Concepts:**
+
+- JOIN
+- GROUP BY
+- SUM()
+- ROUND()
+- Subquery
+- CROSS JOIN
+- NULLIF()
+
+**Expected Result:**
+
+| Category | Category Revenue | Revenue Percentage |
+|---|---:|---:|
+| Electronics | 210000.00 | 76.53 |
+| Furniture | 24000.00 | 8.75 |
+| Accessories | 15500.00 | 5.65 |
+
+**Explanation:**
+
+The query calculates total revenue for each category.
+
+Revenue percentage is calculated using:
+
+(Category Revenue / Total Revenue) × 100
+
+ROUND() limits the decimal places to two.
+
+NULLIF() prevents division by zero.
+
+---
+
+### Query 8: Day with the Highest Sales
+
+**Purpose:**
+
+Identify the date with the highest total sales revenue.
+
+**SQL Concepts:**
+
+- JOIN
+- GROUP BY
+- SUM()
+- ROUND()
+- ORDER BY
+- LIMIT
+
+**Expected Result:**
+
+| Highest Sales Day | Daily Sales |
+|---|---:|
+| 2026-02-14 | 108000.00 |
+
+**Explanation:**
+
+The query groups orders according to their dates.
+
+SUM() calculates daily revenue.
+
+ORDER BY sorts the dates based on sales in descending order.
+
+LIMIT 1 returns the highest-sales date.
+
+---
+
+## 4. NULL Behaviour Demonstration
+
+The following aggregate functions are demonstrated:
+
+- COUNT(*)
+- COUNT(column)
+- SUM(column)
+- AVG(column)
+
+A LEFT JOIN is used to include customers without orders.
+
+**Expected Result for Divya (Customer ID 6):**
+
+| Function | Result |
+|---|---:|
+| COUNT(*) | 1 |
+| COUNT(order_id) | 0 |
+| SUM(order_id) | NULL |
+| AVG(order_id) | NULL |
+
+### Explanation
+
+**COUNT(*)**
+
+Counts all rows, including rows containing NULL.
+
+**COUNT(column)**
+
+Counts only non-NULL values in the specified column.
+
+**SUM(column)**
+
+Calculates the sum of non-NULL values.
+Returns NULL when there are no non-NULL values.
+
+**AVG(column)**
+
+Calculates the average of non-NULL values.
+Returns NULL when there are no non-NULL values.
+
+---
+
+## 5. Difference Between WHERE and HAVING
+
+| WHERE | HAVING |
+|---|---|
+| Filters individual rows | Filters grouped records |
+| Executes before GROUP BY | Executes after GROUP BY |
+| Used to filter normal column values | Commonly used to filter aggregate values |
+| Cannot directly use aggregate functions | Supports aggregate functions |
+
+### Example
+
+```sql
+SELECT
+    customer_id,
+    COUNT(*) AS total_orders
+FROM orders
+WHERE order_date >= '2026-01-01'
+GROUP BY customer_id
+HAVING COUNT(*) > 3;
+```
+
+### Explanation
+
+1. WHERE selects orders placed from January 2026 onwards.
+2. GROUP BY groups the orders according to customer ID.
+3. COUNT() calculates the total orders for each customer.
+4. HAVING selects customers with more than three orders.
+
+**Conclusion:**
+
+WHERE filters rows before grouping, whereas HAVING
+filters groups after aggregation.
+
+---
+
+## 6. SQL Functions Used
+
+| Function | Description |
+|---|---|
+| UPPER() | Converts text into uppercase |
+| CONCAT() | Combines multiple strings |
+| DATEDIFF() | Calculates the difference between dates |
+| DATE_FORMAT() | Changes the date display format |
+| ROUND() | Rounds numeric values |
+| COUNT() | Counts records or non-NULL values |
+| SUM() | Calculates the total |
+| AVG() | Calculates the average |
+
+---
+
+## 7. Conclusion
+
+The Retail Sales Reporting project demonstrates how SQL
+can be used to generate meaningful business reports.
+
+JOIN, GROUP BY, HAVING, subqueries, aggregate functions,
+date functions and string functions help analyze retail
+sales information.
+
+The reports help the retail sales team understand product
+performance, customer purchasing behaviour, monthly sales
+and payment status.
+
+This project demonstrates practical SQL skills for
+real-world retail business reporting.

@@ -1,8 +1,6 @@
 
 -- ============================================
 -- BANK LOAN PORTFOLIO
--- Advanced SQL Assignment
--- Database: MySQL
 -- ============================================
 
 CREATE DATABASE IF NOT EXISTS bank_loan_db;

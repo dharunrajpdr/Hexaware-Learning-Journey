@@ -6,39 +6,30 @@ import com.insurance.interfaces.Reportable;
 public abstract class Policy implements Reportable {
 
     private final String policyNumber;
-
-    private String holderName;
-
+    private final PolicyHolder holder;
     private PolicyStatus status;
 
     public Policy(
             String policyNumber,
-            String holderName,
+            PolicyHolder holder,
             PolicyStatus status
     ) {
 
         if (policyNumber == null ||
                 !policyNumber.matches("POL-[0-9]{4}")) {
-
-            throw new IllegalArgumentException(
-                    "Invalid policy number. Use POL-1234 format."
-            );
+            throw new IllegalArgumentException("Invalid policy number.");
         }
 
-        if (holderName == null || holderName.isBlank()) {
-            throw new IllegalArgumentException(
-                    "Policy holder name cannot be empty."
-            );
+        if (holder == null) {
+            throw new IllegalArgumentException("Policy holder is required.");
         }
 
         if (status == null) {
-            throw new IllegalArgumentException(
-                    "Policy status cannot be null."
-            );
+            throw new IllegalArgumentException("Policy status is required.");
         }
 
         this.policyNumber = policyNumber;
-        this.holderName = holderName;
+        this.holder = holder;
         this.status = status;
     }
 
@@ -46,8 +37,8 @@ public abstract class Policy implements Reportable {
         return policyNumber;
     }
 
-    public String getHolderName() {
-        return holderName;
+    public PolicyHolder getHolder() {
+        return holder;
     }
 
     public PolicyStatus getStatus() {
@@ -57,9 +48,7 @@ public abstract class Policy implements Reportable {
     public void setStatus(PolicyStatus status) {
 
         if (status == null) {
-            throw new IllegalArgumentException(
-                    "Invalid policy status."
-            );
+            throw new IllegalArgumentException("Invalid status.");
         }
 
         this.status = status;
@@ -71,9 +60,9 @@ public abstract class Policy implements Reportable {
     public void generateReport() {
 
         System.out.printf(
-                "%-12s %-12s %-12s %-12.2f%n",
+                "%-12s %-15s %-12s %-12.2f%n",
                 policyNumber,
-                holderName,
+                holder.getName(),
                 status,
                 calculatePremium()
         );

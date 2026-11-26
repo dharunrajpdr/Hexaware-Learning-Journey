@@ -256,4 +256,4 @@ It provides reliable duplicate detection, string normalization, reusable notific
 
 ---
 
-**Developed using Java 21+**
+
